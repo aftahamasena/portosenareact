@@ -1,6 +1,3 @@
-// import React from "react";
-// import "tailwindcss/tailwind.css"; // Pastikan Tailwind CSS sudah di-import di proyek Anda
-
 const skills = [
   {
     src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg",
@@ -31,6 +28,10 @@ const skills = [
     name: "React.js",
   },
   {
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    name: "Next.js",
+  },
+  {
     src: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/1969px-Laravel.svg.png",
     name: "Laravel",
   },
@@ -50,7 +51,10 @@ const skills = [
     src: "https://cdn.icon-icons.com/icons2/2699/PNG/512/axios_logo_icon_168545.png",
     name: "Axios",
   },
-  { src: "https://cdn.worldvectorlogo.com/logos/ajax-1.svg", name: "AJAX" },
+  {
+    src: "https://cdn.worldvectorlogo.com/logos/ajax-1.svg",
+    name: "AJAX",
+  },
   {
     src: "https://avatars.githubusercontent.com/u/67109815?v=4&s=400",
     name: "Tailwind CSS",
@@ -71,34 +75,14 @@ const skills = [
     src: "https://cdn4.iconfinder.com/data/icons/logos-brands-in-colors/3000/figma-logo-512.png",
     name: "Figma",
   },
+  {
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Microsoft_Office_logo_%282013%E2%80%932019%29.svg/405px-Microsoft_Office_logo_%282013%E2%80%932019%29.svg.png",
+    name: "Microsoft Office",
+  },
+  {
+    src: "https://t4.ftcdn.net/jpg/05/67/36/79/360_F_567367993_fp0wjiCQGCR7Q7JsFGAtteCBxgwhYCG4.jpg",
+    name: "Fiber Optic",
+  },
 ];
 
-const SkillCard = ({ src, name }) => (
-  <div className="relative group flex flex-col items-center bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-    <img
-      src={src}
-      alt={`${name} Logo`}
-      className="w-16 h-16 transition-transform transform group-hover:scale-110"
-    />
-    <div className="absolute bottom-0 left-0 right-0 text-center bg-black bg-opacity-70 text-white p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-      <span className="text-sm font-lora">{name}</span>
-    </div>
-  </div>
-);
-
-const SkillsSection = () => (
-  <div className="py-20 xs:py-28 sm:py-32 md:py-36 lg:py-40" id="skill.section">
-    <h1 className="font-gloock mb-5 text-center xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl">
-      Skills
-    </h1>
-    <div className="flex flex-col items-center">
-      <div className="grid xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
-        {skills.map((skill) => (
-          <SkillCard key={skill.name} src={skill.src} name={skill.name} />
-        ))}
-      </div>
-    </div>
-  </div>
-);
-
-export default SkillsSection;
+export default skills;

@@ -13,6 +13,10 @@ export default {
       screens: {
         xs: "320px",
       },
+      animation: {
+        "spin-slow": "spin 12s linear infinite",
+        "ping-slow": "ping 8s linear infinite",
+      },
     },
   },
   plugins: [],

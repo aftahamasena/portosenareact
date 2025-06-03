@@ -1,22 +1,33 @@
 // import React from 'react';
-import Contact from "../components/contact";
+import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import CertificateCarousel from "../components/section/Certificate";
-import Profile from "../components/section/Profile";
-import Projects from "../components/section/Project";
-import SkillsSection from "../components/section/Skill";
+import Certificate from "../components/section/Certificate/Certificate";
+import Profile from "../components/section/Profile/Profile";
+import Projects from "../components/section/Project/Project";
+import Skill from "../components/section/Skill/Skill";
 
 const Home = () => {
   return (
     <div>
       <Navbar />
-      <main className="">
-        <Contact />
-        <Profile />
-        <SkillsSection />
-        <Projects />
-        <CertificateCarousel />
+      <Contact />
+      <main>
+        <section className="mb-20 border-b border-gray-300 pb-20">
+          <Profile />
+        </section>
+
+        <section className="mb-20 border-b border-gray-300 pb-20">
+          <Skill />
+        </section>
+
+        <section className="mb-20 border-b border-gray-300 pb-20">
+          <Projects />
+        </section>
+
+        <section className="mb-20">
+          <Certificate />
+        </section>
       </main>
       <Footer />
     </div>
