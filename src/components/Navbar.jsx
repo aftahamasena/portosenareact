@@ -1,5 +1,40 @@
 import { useState, useEffect } from "react";
 
+const menuItems = [
+  {
+    label: "Profile",
+    id: "profile.section",
+    color: "text-black",
+    mobilecolor: "text-white",
+    underline: "bg-blue-500",
+    hover: "hover:text-blue-700",
+  },
+  {
+    label: "Skill",
+    id: "skill.section",
+    color: "text-black",
+    mobilecolor: "text-white",
+    underline: "bg-green-500",
+    hover: "hover:text-green-600",
+  },
+  {
+    label: "Project",
+    id: "project.section",
+    color: "text-black",
+    mobilecolor: "text-white",
+    underline: "bg-purple-500",
+    hover: "hover:text-purple-600",
+  },
+  {
+    label: "Certificate",
+    id: "certi.section",
+    color: "text-black",
+    mobilecolor: "text-white",
+    underline: "bg-yellow-400",
+    hover: "hover:text-yellow-600",
+  },
+];
+
 const Navbar = () => {
   const [navbarActive, setNavbarActive] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -40,18 +75,18 @@ const Navbar = () => {
     <>
       {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 flex justify-between items-center font-lora text-sm w-full h-[60px] min-h-[60px] px-4 sm:px-6 lg:px-36 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 flex justify-between items-center font-lora text-sm w-full h-[60px] px-4 sm:px-6 lg:px-20 transition-all duration-300 ${
           menuOpen
             ? "bg-transparent text-white"
             : navbarActive
             ? "bg-white text-black shadow-md"
-            : "bg-white/60 text-black"
+            : "bg-white/60 text-black backdrop-blur-sm"
         }`}
       >
         {/* Logo */}
         <div className="flex items-center">
           <img
-            src="assets/img/logo.png"
+            src="/assets/img/logo.png"
             alt="logo"
             className="rounded-full w-28 sm:w-36 md:w-40 max-w-[160px]"
           />
@@ -83,41 +118,16 @@ const Navbar = () => {
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex space-x-10">
-          {[
-            {
-              label: "Profile",
-              id: "profile.section",
-              color: "blue-800",
-              underline: "blue-600",
-            },
-            {
-              label: "Skill",
-              id: "skill.section",
-              color: "green-600",
-              underline: "green-600",
-            },
-            {
-              label: "Project",
-              id: "project.section",
-              color: "purple-600",
-              underline: "purple-600",
-            },
-            {
-              label: "Certificate",
-              id: "certi.section",
-              color: "yellow-500",
-              underline: "yellow-500",
-            },
-          ].map((item) => (
+          {menuItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollWithOffset(item.id)}
-              className={`group relative font-medium text-gray-800 hover:text-${item.color} transition-transform hover:-translate-y-1`}
+              className={`group relative font-medium transition-transform duration-200 transform hover:-translate-y-1 ${item.color} ${item.hover}`}
             >
               {item.label}
               <span
-                className={`absolute left-0 -bottom-1 h-[2px] w-0 bg-${item.underline} transition-all duration-300 group-hover:w-full`}
-              ></span>
+                className={`absolute left-0 -bottom-1 h-[2px] w-0 ${item.underline} transition-all duration-300 group-hover:w-full`}
+              />
             </button>
           ))}
         </div>
@@ -139,19 +149,14 @@ const Navbar = () => {
           ×
         </button>
 
-        {[
-          { label: "Profile", id: "profile.section", color: "blue-400" },
-          { label: "Skill", id: "skill.section", color: "green-400" },
-          { label: "Project", id: "project.section", color: "purple-400" },
-          { label: "Certificate", id: "certi.section", color: "yellow-400" },
-        ].map((item) => (
+        {menuItems.map((item) => (
           <button
             key={item.id}
             onClick={() => {
               scrollWithOffset(item.id);
               setMenuOpen(false);
             }}
-            className={`text-white text-xl my-2 hover:text-${item.color} transition`}
+            className={`text-xl my-3 transition-all duration-200 ${item.mobilecolor} ${item.hover}`}
           >
             {item.label}
           </button>
