@@ -10,11 +10,12 @@ export default function CreativeProjects() {
   const handleViewMore = () => setVisibleCount(projects.length);
   const handleViewLess = () => {
     setVisibleCount(defaultVisible);
-
-    // Scroll ke atas ke elemen dengan id "project.section"
     const section = document.getElementById("project.section");
     if (section) {
-      section.scrollIntoView({ behavior: "smooth", block: "start" });
+      const yOffset = -80;
+      const y =
+        section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
@@ -123,9 +124,19 @@ function ViewLessButton({ onClick }) {
 function CreativeProjectItem({ project, reverse }) {
   const controls = useAnimation();
   const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true });
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024
+  );
 
   useEffect(() => {
     if (inView) controls.start("visible");
+
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [controls, inView]);
 
   const containerVariants = {
@@ -146,6 +157,17 @@ function CreativeProjectItem({ project, reverse }) {
     },
   };
 
+  function truncateText(text, maxWords = 200) {
+    const words = text.split(" ");
+    if (words.length <= maxWords) return text;
+    return words.slice(0, maxWords).join(" ");
+  }
+
+  const isMobile = windowWidth < 768;
+  const fullText = project.deskripsi;
+  const truncatedText = truncateText(fullText, 200);
+  const needsTruncate = fullText.split(" ").length > 200;
+
   return (
     <motion.div
       ref={ref}
@@ -154,7 +176,7 @@ function CreativeProjectItem({ project, reverse }) {
       variants={containerVariants}
       className={`flex flex-col md:flex-row items-stretch md:items-stretch ${
         reverse ? "md:flex-row-reverse" : ""
-      } gap-12 md:gap-16`}
+      } gap-8 md:gap-14`}
     >
       {/* Image */}
       <motion.div
@@ -165,38 +187,98 @@ function CreativeProjectItem({ project, reverse }) {
         <img
           src={project.img}
           alt={project.title}
-          className="w-full h-full object-cover rounded-xl drop-shadow-sm"
+          className={`w-full h-full object-cover rounded-xl drop-shadow-sm ${
+            isMobile ? "max-h-[180px]" : "max-h-[320px]"
+          }`}
           draggable={false}
           loading="lazy"
         />
       </motion.div>
 
       {/* Content */}
-      <div className="md:w-1/2 max-w-xl flex flex-col justify-between text-center md:text-left px-2 sm:px-0">
-        <div className="space-y-3 sm:space-y-4">
-          <h2 className="text-4xl sm:text-5xl md:text-5xl tracking-tight text-gray-900 select-text font-gloock leading-tight">
+      <div className="md:w-1/2 max-w-xl flex flex-col justify-between px-6 sm:px-8 md:px-0">
+        <div
+          className={`space-y-2 sm:space-y-3 ${
+            isMobile ? "text-center" : "text-left"
+          }`}
+        >
+          <h2
+            className={`tracking-tight text-gray-900 select-text font-gloock leading-tight ${
+              isMobile ? "text-2xl sm:text-3xl" : "text-5xl"
+            }`}
+          >
             {project.title}
           </h2>
-          <p className="font-medium text-gray-800 tracking-wide font-merriweather">
-            <span className="font-normal text-gray-600">{project.role}</span>
+          <p
+            className={`font-medium tracking-wide font-merriweather ${
+              isMobile ? "text-xs text-gray-700" : "text-base text-gray-800"
+            }`}
+          >
+            <span className="font-normal">{project.role}</span>
           </p>
-          <div className="flex flex-wrap gap-3 justify-center md:justify-start">
+          <div
+            className={`flex flex-wrap gap-2 justify-center md:justify-start ${
+              isMobile ? "text-xs" : "text-sm"
+            }`}
+          >
             {project.tech.map((tech, idx) => (
               <span
                 key={idx}
-                className="bg-gray-200 font-merriweather text-gray-700 px-3 py-1 rounded-full text-sm font-medium"
+                className="bg-gray-200 font-merriweather text-gray-700 px-2 py-0.5 rounded-full font-medium"
               >
                 {tech}
               </span>
             ))}
           </div>
-          <p className="text-base text-gray-700 leading-relaxed font-merriweather">
-            {project.deskripsi}
+
+          {/* Deskripsi dengan See More diakhir teks */}
+          <p
+            className={`mt-3 text-gray-700 leading-relaxed font-merriweather ${
+              isMobile ? "text-sm" : "text-base"
+            } text-justify`}
+          >
+            {isMobile && !isExpanded && needsTruncate ? (
+              <>
+                {truncatedText}
+                <span
+                  onClick={() => setIsExpanded(true)}
+                  className="text-green-700 font-semibold underline cursor-pointer ml-1"
+                  role="button"
+                  tabIndex={0}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") setIsExpanded(true);
+                  }}
+                >
+                  ...See More
+                </span>
+              </>
+            ) : (
+              <>
+                {fullText}
+                {isMobile && needsTruncate && (
+                  <span
+                    onClick={() => setIsExpanded(false)}
+                    className="text-green-700 font-semibold underline cursor-pointer ml-1"
+                    role="button"
+                    tabIndex={0}
+                    onKeyPress={(e) => {
+                      if (e.key === "Enter") setIsExpanded(false);
+                    }}
+                  >
+                    See Less
+                  </span>
+                )}
+              </>
+            )}
           </p>
         </div>
 
         {/* Links */}
-        <div className="mt-6 flex gap-6 justify-center md:justify-start">
+        <div
+          className={`mt-6 flex gap-5 justify-center md:justify-start ${
+            isMobile ? "text-xs" : "text-sm"
+          }`}
+        >
           {project.github && (
             <button
               onClick={() => window.open(project.github, "_blank")}

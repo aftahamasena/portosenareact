@@ -136,7 +136,7 @@ const SkillsSection = () => {
         
           w-full max-w-[1200px]
           grid
-          grid-cols-[repeat(auto-fit,minmax(120px,1fr))]
+          xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7
           gap-6
           sm:gap-7
           md:gap-8

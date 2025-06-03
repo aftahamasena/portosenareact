@@ -75,7 +75,8 @@ const Navbar = () => {
     <>
       {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 right-0 z-40 flex justify-between items-center font-lora text-sm w-full h-[60px] px-4 sm:px-6 lg:px-20 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 w-full h-[60px] px-4 sm:px-6 md:px-10 transition-all duration-300 overflow-hidden box-border
+        flex justify-between items-center font-lora text-sm ${
           menuOpen
             ? "bg-transparent text-white"
             : navbarActive
@@ -84,11 +85,11 @@ const Navbar = () => {
         }`}
       >
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center w-[100px] sm:w-[140px] md:w-[180px] max-w-full">
           <img
             src="/assets/img/logo.png"
             alt="logo"
-            className="rounded-full w-28 sm:w-36 md:w-40 max-w-[160px]"
+            className="w-full h-auto object-contain"
           />
         </div>
 
@@ -117,7 +118,7 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex space-x-10">
+        <div className="hidden lg:flex space-x-10 ">
           {menuItems.map((item) => (
             <button
               key={item.id}
@@ -135,20 +136,22 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/80 backdrop-blur-md transition-all duration-500 p-6 ${
+        className={`fixed inset-0 z-50 w-screen h-screen flex flex-col items-center justify-center bg-black/80 backdrop-blur-md transition-all duration-500 p-6 overflow-hidden ${
           menuOpen
-            ? "opacity-100 translate-y-0"
+            ? "opacity-100 translate-y-0 pointer-events-auto"
             : "opacity-0 -translate-y-full pointer-events-none"
         }`}
       >
+        {/* Close Button */}
         <button
           onClick={() => setMenuOpen(false)}
-          className="absolute top-6 right-6 text-3xl text-white bg-white/30 hover:bg-white/50 px-4 py-1 rounded-full"
+          className="absolute top-6 right-6 text-3xl text-white bg-white/30 hover:bg-white/50 px-4 py-2 rounded-full flex items-center justify-center"
           aria-label="Close menu"
         >
-          ×
+          <span className="font-semibold text-xl">X</span>
         </button>
 
+        {/* Menu Items */}
         {menuItems.map((item) => (
           <button
             key={item.id}
@@ -156,7 +159,7 @@ const Navbar = () => {
               scrollWithOffset(item.id);
               setMenuOpen(false);
             }}
-            className={`text-xl my-3 transition-all duration-200 ${item.mobilecolor} ${item.hover}`}
+            className={`text-lg my-1 font-gloock transition-all duration-200 ${item.mobilecolor} ${item.hover}`}
           >
             {item.label}
           </button>

@@ -9,26 +9,29 @@ import Skill from "../components/section/Skill/Skill";
 
 const Home = () => {
   return (
-    <div>
+    <div className="bg-white text-black">
       <Navbar />
-      <Contact />
-      <main>
-        <section className="mb-20 border-b border-gray-300 pb-20">
-          <Profile />
-        </section>
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Contact />
 
-        <section className="mb-20 border-b border-gray-300 pb-20">
-          <Skill />
-        </section>
+        <main>
+          <section className="mb-20 border-b border-gray-300 pb-20">
+            <Profile />
+          </section>
 
-        <section className="mb-20 border-b border-gray-300 pb-20">
-          <Projects />
-        </section>
+          <section className="mb-20 border-b border-gray-300 pb-20">
+            <Skill />
+          </section>
 
-        <section className="mb-20">
-          <Certificate />
-        </section>
-      </main>
+          <section className="mb-20 border-b border-gray-300 pb-20">
+            <Projects />
+          </section>
+
+          <section className="mb-20">
+            <Certificate />
+          </section>
+        </main>
+      </div>
       <Footer />
     </div>
   );

@@ -29,7 +29,7 @@ const Profile = () => {
 
   return (
     <div
-      className="flex flex-col items-center justify-center pt-10 sm:pt-14 md:pt-20 lg:pt-16 px-4 sm:px-6 md:px-10 overflow-hidden"
+      className="flex flex-col items-center justify-center pt-24 sm:pt-20 md:pt-16 lg:pt-24 xl:pt-16 px-4 sm:px-6 md:px-10 overflow-hidden"
       id="profile.section"
     >
       <motion.div
