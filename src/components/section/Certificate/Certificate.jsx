@@ -175,11 +175,11 @@ export default function UniqueCertificateCarousel() {
                     draggable={false}
                     loading="lazy"
                   />
-                  <div className="p-3 sm:p-4 text-center flex flex-col justify-center h-[35%]">
-                    <p className="text-sm sm:text-base font-semibold text-gray-900 truncate">
+                  <div className="p-3 sm:p-4 text-center flex flex-col justify-center h-[35%] font-merriweather">
+                    <p className="text-sm sm:text-base font-semibold text-gray-900 leading-tight">
                       {cert.description.split(" : ")[0]}
                     </p>
-                    <p className="text-xs sm:text-sm text-gray-700 mt-1 leading-snug truncate">
+                    <p className="text-xs sm:text-sm text-gray-700 mt-1 leading-snug">
                       {cert.description.split(" : ")[1]}
                     </p>
                   </div>
