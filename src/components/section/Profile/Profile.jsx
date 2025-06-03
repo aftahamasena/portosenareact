@@ -41,7 +41,7 @@ const Profile = () => {
       >
         {/* Nama */}
         <motion.p
-          className="relative z-10 pb-1 text-sm xs:text-base sm:text-lg md:text-xl lg:text-6xl font-gloock"
+          className="relative z-10 pb-1 text-xl xs:text-2xl sm:text-3xl md:text-text-4xl lg:text-6xl font-gloock"
           custom={0}
           variants={textVariant}
           initial="hidden"
@@ -53,7 +53,7 @@ const Profile = () => {
 
         {/* Title */}
         <motion.h1
-          className="relative z-10 font-gloock text-base xs:text-lg sm:text-2xl md:text-4xl lg:text-6xl mb-4 md:mb-6 leading-snug md:leading-tight"
+          className="relative z-10 font-gloock text-base xs:text-3xl sm:text-3xl md:text-4xl lg:text-6xl mb-5 md:mb-6 leading-snug md:leading-tight"
           custom={1}
           variants={textVariant}
           initial="hidden"
@@ -92,11 +92,11 @@ const Profile = () => {
             </>
           ) : (
             <>
-              <span className="inline-block text-slate-800 cursor-default select-none">
+              <span className="inline-block cursor-default select-none text-yellow-600">
                 Full-stack Website
               </span>
               <br />
-              <span className="inline-block text-slate-800 cursor-default select-none">
+              <span className="inline-block text-green-600 cursor-default select-none">
                 Developer
               </span>
             </>
